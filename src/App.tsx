@@ -2,28 +2,11 @@ import { Box, Button, Divider } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Router, Outlet, ReactLocation, Link } from '@tanstack/react-location';
 import { useStateContext } from './StateContext';
+import { Link1 } from './pages/Link1';
+import { Link2 } from './pages/Link2';
 const location = new ReactLocation();
 const Index = () => {
   return <Box>ゆっくりしていってね</Box>;
-};
-const Hoge = () => {
-  const { setFlag, flag } = useStateContext();
-  return (
-    <Box>
-      <Button onClick={() => setFlag((b) => !b)}>
-        フラグを立てたり下げたり
-      </Button>
-      <Box>{flag ? 'フラグが上がっています' : 'フラグが下がっています'}</Box>
-      ホゲホゲ
-    </Box>
-  );
-};
-const Foo = () => {
-  const { flag } = useStateContext();
-  if (flag) {
-    throw new Error('フラグが立ってるからクラッシュさせた！');
-  }
-  return <Box>フーが表示されています！</Box>;
 };
 function App() {
   return (
@@ -31,8 +14,8 @@ function App() {
       location={location}
       routes={[
         { path: '/', element: <Index /> },
-        { path: '/link1', element: <Hoge /> },
-        { path: '/link2', element: <Foo /> },
+        { path: '/link1', element: <Link1 /> },
+        { path: '/link2', element: <Link2 /> },
       ]}
     >
       <Box>

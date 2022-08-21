@@ -1,3 +1,7 @@
 # reactでplaywrightのテスト試すのサンプル
 
 - page.gotoでリンク移動をするとページが再リロードされてることを確認->ボタンでリンク遷移する必要あり。
+
+# ページオブジェクト作ってimportとかやったらcannot find module出た。
+- package.jsonのtype:moduleをtype:commonjsにしたら治った。
+- 参照したリンク: https://github.com/microsoft/playwright/issues/12487#issuecomment-1203470188

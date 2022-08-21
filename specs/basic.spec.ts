@@ -1,11 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { Link1Page } from './pageObjects/Link1Page';
+import { Link2Page } from './pageObjects/Link2Page';
 
 test("/link1でフラグを立てた後に/link2に遷移するとクラッシュする", async ({page}) => {
   await page.goto('http://localhost:5173/');
-  await page.locator(`text=リンク1`).click();
-  await page.locator('text=フラグを立てたり下げたり').click();
-  expect(await page.locator('text=フラグが上がっています').innerText()).toBe("フラグが上がっています");
-  await page.locator(`text=リンク2`).click();
-  const fooText = await page.locator(`text=フーが表示されています！`).innerText({timeout:1500});
-  expect(fooText).toBe(`フーが表示されています！`);
+  const link1Page = new Link1Page(page);
+  await link1Page.goto();
+  await link1Page.toggleFlag();
+  const link2Page = new Link2Page(page);
+  await link2Page.goto();
+  expect(await link2Page.getFooText()).toBe("フーが表示されています！");
 });
